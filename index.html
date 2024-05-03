@@ -3,123 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>stopwatch</title>
-    <link rel="stylesheet" href="style.css">
+    <title> temperature Converter</title>
 </head>
 <body>
-    <div id=" container">
-        <div id="time">
- <span class="digit" id="hr">00</span>
-  <span class="txt">Hr</span>
-  <span class="digit" id="min">00</span>
-  <span class="txt">min</span>
-  <span class="digit" id="sec">00</span>
-  <span class="txt">sec</span>
-  <span class="digit" id="count">00</span>
-            
-           
-            
+         <h1> temperature Converter</h1>
 
-        </div>
-        <div id="btn-container">
-        <button class="btn" id="start" onclick ="start()">start</button>
-        <button class="btn" id="stop" onclick="stop()">stop</button>
-        <button class="btn" id="Reset" onclick="reset()">Reset</button>
-    </div>
-    </div>
+        <div id="container">
+            <div class="input-div">
+                
+                <label>celsius</label><br>
+                <input type="number" value="0" id="cel" class="inp">
+                    
+                </div>
+                <div class="input-div">
+                <label>fahernheit</label><br>
+                <input type="number" value="32" id="fah" class="inp">
+                </div>
+            </div>
+        
+         
 
-<script>
-   // onclick laga diye html mai ab addEventListener lagna jaruri nahi hai js mai
-   // three function liye the wahi declare huwa hai
-   // ak var decalare karte hai jiska value count 0 hai sabka 
-    var hr =0;   // sab ye store rhaega jaha jaha ye hai 
-    var min = 0;
-    var sec = 0;
-    var count =0;
-    // ye varibale bante hai timer chal raha  hai ya ruka huwa hai 
-    var timer = false ;// false denote timer ruka hai true mai chal raha hai 
+
+
+
+
+    <style>
+
+        body{
+            padding: 50px 100px;
+        }
+        h1{
+            text-align: center;
+        }
+        #container{
+            text-align: center;
+            background-color: green;
+            padding: 50px;
+        }
+        .input-div{
+            display: inline-block;
+        }
+        .inp{
+            
+            padding: 5px 10px;
+            margin: 10px;
+            font-size: 30px;
+            font-weight: bold;
+            width: 250px;
+            text-align: center;
+        }
+    
+        label{
+            font-size: 22px;
+            
+        }
+       
 
       
-   function start(){
-    timer = true;
-    stopwatch();
-   }
-   function stop(){
-    timer = false;
-    
-   }
-   function reset(){
-    timer = false;  // agar set timeout false ho jayga to ye kam nahi karega settime out
-    Hr =0;   // sab ye store rhaega jaha jaha ye hai 
-     min = 0;
-    sec = 0;
-    count =0; 
-    document.getElementById("hr").innerHTML ="00";  // aha pe vairable he na de ke string de dete hai 
-    document.getElementById("min").innerHTML ="00";
-    document.getElementById("sec").innerHTML ="00";
-    document.getElementById("count").innerHTML ="00";
-
-   }
-  function stopwatch(){
-    if(timer == true) {                          // first check karna hai timer true hai ya nahi stopwatch mai 
-    count = count+1 ; // 10ms mai rukna hai or rakhta hai count to usko increse kar do 
-    
-    if(count == 100){
-    sec = sec+1;
-    count = 0;
-  }
-
-    if(sec==60){
-    min = min+1;
-sec=0;
-  }
-if (min == 60) {
-    hr = hr+1 ;  // jab 1 hour compelet hota hai ghanta or sec dono 0 hota hai 
-    min= 0;
-    sec = 0;
-}   
- var hrString = hr;
- var minString = min;
- var secString = sec;    // avi tak string mai convert mai nahi huwa hai ab hoga ye only copy hoga 
- var countString = count;
-   
-  // kab kab string mai convert karenge jab oo single digit
-  if(hr < 10){
-    hrString = "0" + hrString;
-  } // ye sabke ke liye add kar deta hu string of duble 10
-  
-  if(min < 10){
-    minString = "0" + minString;
-  }
-  if(sec< 10){
-    secString = "0" + secString;
-  }
- 
-
-  
-  if(count < 10){
-    countString = "0" + countString;
-  }
-
-
-    document.getElementById("hr").innerHTML= hrString;
-    document.getElementById("min").innerHTML= minString;
-    document.getElementById("sec").innerHTML = secString;
-    document.getElementById("count").innerHTML=countString;
-                                                        // logic kaise lagye dekhe 
-                                                        // jaise vi 999 count huwa taise 1 sec ho jayga phir jaise 60sec huwa to 1mint ho jayga phir jaise vi 60min huwa taise he 1 hour ho jayga 
+        
+        
 
 
 
-    setTimeout("stopwatch()",10)   // phir 10ms ruka phir start timer jab rukega jab tak app stop button pe or reset batan mai click nahi karte hai 
+    </style>
+    <script>
+            // input event change karke dusre mai aa jata hai 
+         var cel = document.getElementById("cel")   
+         var fah = document.getElementById("fah")
 
-  }
 
-  }
+         cel.addEventListener('input', function(){
+            //console.log('cel changed');   // click karne ke bad change ho jata hai cel mai click and same fah 
+            let C = this.value;  // ab oo store ho jata hai cel ke formula vi mil jayga 
+            let f =  (C * 9/5) + 32; // change kar diye f
+            if (!Number.isInteger(f)) {   // isme passs karte kis number ko chaek karna hai !ka sine if ye integer nahi to avi if mai jana 
+               f= f.toFixed(4) ;
+            }
+            fah.value = f;
+        
+         });
+         fah.addEventListener('input', function (){
+            //console.log('fah changed');  
+            let F = this.value
+            let C =  (F - 32) * 5/9;
+            // phir cel ka chnage kar dete hai 
+            if (!Number.isInteger(C)) {   // isme passs karte kis number ko chaek karna hai !ka sine if ye integer nahi to avi if mai jana 
+               C= C.toFixed(4) ;
+            }
+            cel.value = C;
+
+         });
 
 
-</script>
-
+    </script>
     
 </body>
 </html>
