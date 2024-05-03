@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+const user ={
+    username : "vikash",
+    loginCount: 8,    // sara object literals hai // collection of properties hai 
+    signedIn : true,
+    getUserDetails: function(){
+       // console.log("got user details from database");
+      // console.log(`username: ${ this.username}`);  // pata he nahi kon sa username define karna hai so
+                                       // if bhar se saman lena hai to this keyword use karna hai 
+          console.log(this);       // isse pata chalta hai currnet context                       
+    }           
+}
+// ye galobal context hai aha agar this value print kara dete hai {}empty ayga 
+console.log(user.username);
+//console.log( user.getUserDetails());
+//console.log(this);  // window object is a galobal object hai 
+          //  ***** constructor ******//
+//const PromiseOne = new Promise()
+//const Date = new Date()  //   new keyword ye srif alow karta hai construction function  ke 
+// construction function ak bar nw copy deta hai uspe kya kheloge apke par nirvar hai 
+function User(username, loginCount , isLoggedIn){  // is threee value ko name mai set karna hai 
+    this.username = username;
+    this.loginCount = loginCount;
+    this.isLoggedIn = isLoggedIn
+    this .greeting= function(){
+        console.log(`welcome ${this.username}`);
+    }
+
+    return this   // return this likho ya nahi output mil jayga implicity 
+}
+// construction function ak bar nw copy deta hai uspe kya kheloge apke par nirvar hai 
+const userOne = new User("vikash" , 21 , true)   // if window kw under ayga ye sabb to app new  add kar do user ke pahle phir solution 
+const userTwo =  new User ("chai or code ", 11, true)  // ye value overright kar di hai chahnge kar di pahle ka value 
+console.log(userOne.constructor);
+//console.log(userTwo);
+
+        //  *******new keyword   construction function ***********
+
+function multipleby5(num){
+    return num *5
+}
+multipleby5.power =2
+console.log(multipleby5(5));
+console.log(multipleby5.power);
+console.log(multipleby5.prototype);
+
+function createUser(username, score){
+    this.username = username
+    this.score = score
+}
+createUser.prototype.increment =function(){
+    this.score++   // ab score ko ye pata nahi ki kisa rate bhadhana hai this means jine he bulya hai 
+
+}
+createUser .prototype.printMe = function(){
+    console.log(`price is ${this.score}`);  // asha se kuch vi change kar sakte hai 
+}
+const chai = new createUser ("chai", 25)   // program run nahi hoga is tara apko new add karna higa creatuser se pahle tab pata chalega
+const teq = createUser ("tea", 250)
+
+chai.printMe()
+// java script new keyword ke through construction function deti hai 
+</script>
