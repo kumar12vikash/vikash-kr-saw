@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> temperature Converter</title>
+</head>
+<body>
+         <h1> temperature Converter</h1>
+
+        <div id="container">
+            <div class="input-div">
+                
+                <label>celsius</label><br>
+                <input type="number" value="0" id="cel" class="inp">
+                    
+                </div>
+                <div class="input-div">
+                <label>fahernheit</label><br>
+                <input type="number" value="32" id="fah" class="inp">
+                </div>
+            </div>
+        
+         
+
+
+
+
+
+    <style>
+
+        body{
+            padding: 50px 100px;
+        }
+        h1{
+            text-align: center;
+        }
+        #container{
+            text-align: center;
+            background-color: green;
+            padding: 50px;
+        }
+        .input-div{
+            display: inline-block;
+        }
+        .inp{
+            
+            padding: 5px 10px;
+            margin: 10px;
+            font-size: 30px;
+            font-weight: bold;
+            width: 250px;
+            text-align: center;
+        }
+    
+        label{
+            font-size: 22px;
+            
+        }
+       
+
+      
+        
+        
+
+
+
+    </style>
+    <script>
+            // input event change karke dusre mai aa jata hai 
+         var cel = document.getElementById("cel")   
+         var fah = document.getElementById("fah")
+
+
+         cel.addEventListener('input', function(){
+            //console.log('cel changed');   // click karne ke bad change ho jata hai cel mai click and same fah 
+            let C = this.value;  // ab oo store ho jata hai cel ke formula vi mil jayga 
+            let f =  (C * 9/5) + 32; // change kar diye f
+            if (!Number.isInteger(f)) {   // isme passs karte kis number ko chaek karna hai !ka sine if ye integer nahi to avi if mai jana 
+               f= f.toFixed(4) ;
+            }
+            fah.value = f;
+        
+         });
+         fah.addEventListener('input', function (){
+            //console.log('fah changed');  
+            let F = this.value
+            let C =  (F - 32) * 5/9;
+            // phir cel ka chnage kar dete hai 
+            if (!Number.isInteger(C)) {   // isme passs karte kis number ko chaek karna hai !ka sine if ye integer nahi to avi if mai jana 
+               C= C.toFixed(4) ;
+            }
+            cel.value = C;
+
+         });
+
+
+    </script>
+    
+</body>
+</html>
